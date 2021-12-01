@@ -90,6 +90,29 @@ struct caml_context {
 extern value * caml_globals[];
 extern intnat caml_globals_inited;
 
+/* Structure of frame descriptors */
+
+typedef struct {
+  uintnat retaddr;
+  unsigned short frame_size;
+  unsigned short num_live;
+  unsigned short live_ofs[1 /* num_live */];
+  /*
+    If frame_size & 1, then debug info follows:
+  uint32_t debug_info_offset;
+    Debug info is stored as a relative offset to a debuginfo structure. */
+} frame_descr;
+
+typedef struct {
+  frame_descr** descriptors;
+  int mask;
+} caml_frame_descrs;
+
+caml_frame_descrs caml_get_frame_descrs(void);
+
+CAMLextern frame_descr * caml_next_frame_descriptor(caml_frame_descrs fds, uintnat * pc, char ** sp, struct stack_info* stack);
+
 #endif /* CAML_INTERNALS */
 
 #endif /* CAML_STACK_H */
+
