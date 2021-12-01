@@ -40,6 +40,10 @@ frame_descr * caml_next_frame_descriptor(caml_frame_descrs fds, uintnat * pc, ch
 
   while (1) {
     d = caml_find_frame_descr(fds, *pc);
+    /* If we're called on a non-ocaml part of the stack */
+    if (d == NULL) {
+      return NULL;
+    }
     /* Skip to next frame */
     if (d->frame_size != 0xFFFF) {
       /* Regular frame, update sp/pc and return the frame descriptor */
