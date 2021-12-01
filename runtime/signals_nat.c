@@ -35,7 +35,6 @@
 #include "caml/osdeps.h"
 #include "caml/signals.h"
 #include "signals_osdep.h"
-#include "caml/stack.h"
 
 #ifndef NSIG
 #define NSIG 64

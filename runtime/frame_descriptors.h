@@ -20,6 +20,7 @@
 #define CAML_FRAME_DESCRIPTORS_H
 
 #include "caml/config.h"
+#include "caml/stack.h"
 
 #define Hash_retaddr(addr, mask)                          \
   (((uintnat)(addr) >> 3) & (mask))

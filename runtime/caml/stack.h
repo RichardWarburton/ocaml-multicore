@@ -20,6 +20,9 @@
 
 #ifdef CAML_INTERNALS
 
+#include "fiber.h"
+#include "misc.h"
+
 /* Macros to access the stack frame */
 
 #ifdef TARGET_i386
